@@ -11,10 +11,10 @@ include('utils/connect_db.php');
 	
 	if (isset($_GET['rid'])) {
 	$targetID = $_GET['rid'];		
-    $sql = mysql_query("SELECT * FROM reviews WHERE review_id='$targetID' LIMIT 1");
-    $productCount = mysql_num_rows($sql); // count the output amount
+    $sql = mysqli_query($link,"SELECT * FROM reviews WHERE review_id='$targetID' LIMIT 1");
+    $productCount = mysqli_num_rows($sql); // count the output amount
     if ($productCount > 0) {
-	    while($row = mysql_fetch_array($sql)){ 
+	    while($row = mysqli_fetch_array($sql)){ 
              $review_id = $row["review_id"];
 			 $artist = $row["artist"];
 			 $title = $row["title"];
@@ -34,7 +34,7 @@ include('utils/connect_db.php');
 
 		
 		// retrive comments with review_id
-		$comment_query = mysql_query(
+		$comment_query = mysqli_query($link,
 			"SELECT *
 			FROM comment
 			WHERE review_id ='$targetID'
@@ -105,7 +105,7 @@ include('utils/connect_db.php');
 		<div class="center">
 				<h2>Comments.....</h2>
 					<div class="comment-block">
-					<?php while($comment = mysql_fetch_array($comment_query)): ?>
+					<?php while($comment = mysqli_fetch_array($comment_query)): ?>
 						<div class="comment-item">
 							<div class="comment-avatar">
 								<img src="style/comment_thumb.jpg" alt="avatar">

@@ -8,7 +8,7 @@ include('utils/connect_db.php');
 	
 	if (isset($_GET['rid'])) {
 	$targetID = $_GET['rid'];		
-    $sql = mysql_query("SELECT * FROM reviews WHERE review_id='$targetID' LIMIT 1");
+    $sql = mysqli_query($link,"SELECT * FROM reviews WHERE review_id='$targetID' LIMIT 1");
     $productCount = mysql_num_rows($sql); // count the output amount
     if ($productCount > 0) {
 	    while($row = mysql_fetch_array($sql)){ 

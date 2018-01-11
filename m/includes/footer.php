@@ -2,7 +2,7 @@
   
 include "utils/connect_db.php";
 
-$ip_result=mysql_query("SELECT MAX(id) FROM info");
+$ip_result=mysqli_query($link,"SELECT MAX(id) FROM info");
 while ($row = mysql_fetch_array($ip_result, MYSQL_NUM)) 
 {
 $totalips = $row[0] ;  

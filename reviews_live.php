@@ -7,10 +7,10 @@ include('utils/connect_db.php');
 
 	
 	$reviews_q="SELECT * FROM reviews WHERE category = 'Live' ORDER BY review_id DESC;";
-	$reviews_r=mysql_query($reviews_q) or die ("Query to get data from reviews failed: ".mysql_error());
+	$reviews_r=mysqli_query($link,$reviews_q) or die ("Query to get data from reviews failed: ".mysqli_error());
 	$reviews = array();
 	$y = 0;
-	while ($row = mysql_fetch_assoc($reviews_r)) {
+	while ($row = mysqli_fetch_assoc($reviews_r)) {
 		foreach ($row as $k => $v) {
 			$reviews[$y][$k] = $v;
 		}

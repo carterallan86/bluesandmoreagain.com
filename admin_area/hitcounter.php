@@ -14,9 +14,9 @@ $password = preg_replace('#[^A-Za-z0-9]#i', '', $_SESSION["password"]); // filte
 // Run mySQL query to be sure that this person is an admin and that their password session var equals the database information
 // Connect to the MySQL database  
 include "../utils/connect_db.php"; 
-$sql = mysql_query("SELECT * FROM admin WHERE id='$managerID' AND username='$manager' AND password='$password' LIMIT 1"); // query the person
+$sql = mysqli_query($link,"SELECT * FROM admin WHERE id='$managerID' AND username='$manager' AND password='$password' LIMIT 1"); // query the person
 // ------- MAKE SURE PERSON EXISTS IN DATABASE ---------
-$existCount = mysql_num_rows($sql); // count the row nums
+$existCount = mysqli_num_rows($sql); // count the row nums
 if ($existCount == 0) { // evaluate the count
 	 echo "Your login session data is not on record in the database.";
      exit();
@@ -26,17 +26,17 @@ if ($existCount == 0) { // evaluate the count
 <?php
 $query = "SELECT SUM(count)  AS totalhits FROM hits"; 
 	 
-	$result = mysql_query($query) or die(mysql_error());
+	$result = mysqli_query($link,$query) or die(mysqli_error());
 
 	
-	while($row = mysql_fetch_array($result))
+	while($row = mysqli_fetch_array($result))
 	{
 		$totalhits = $row['totalhits']  ;
 	}
 	
 	
-$result=mysql_query("SELECT MAX(id) FROM info");
-while ($row = mysql_fetch_array($result, MYSQL_NUM)) 
+$result=mysqli_query($link,"SELECT MAX(id) FROM info");
+while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) 
 {
 $totalips = $row[0] ;  
 }
@@ -65,7 +65,7 @@ $totalips = $row[0] ;
 	
 					echo '<h3>Hits</h3>' ;
 
-					$result = mysql_query("SELECT * FROM " . $dbtablehits . " ORDER BY count DESC");
+					$result = mysqli_query($link,"SELECT * FROM " . $dbtablehits . " ORDER BY count DESC");
 	
 					echo "<table width='100%' border='0'>";
 					echo '	<tr>
@@ -74,7 +74,7 @@ $totalips = $row[0] ;
 						</tr>' ;
 
 					// keeps getting the next row until there are no more to get
-					while($row = mysql_fetch_array( $result )) 
+					while($row = mysqli_fetch_array( $result )) 
 					{
 					// Print out the contents of each row into a table
 					echo '<tr><td bgcolor="#75D169">'; 
@@ -88,14 +88,14 @@ $totalips = $row[0] ;
 					
 					echo '<h3> Visitors </h3>' ;
 
-				$result = mysql_query("SELECT * FROM $dbtableinfo ORDER BY id DESC") 
-				or die(mysql_error());  
+				$result = mysqli_query($link,"SELECT * FROM $dbtableinfo ORDER BY id DESC") 
+				or die(mysqli_error());  
 
 				echo "<table width='100%' border='0'>";
 				echo '<tr> <td width="200" bgcolor="#1AC414">  IP </td> <td height="2" bgcolor="#1AC414" width="400">User agent</td> <td height="2" bgcolor="#1AC414" width="169"> Date &amp; Time</td></tr>';
 
 				// keeps getting the next row until there are no more to get
-				while($row = mysql_fetch_array( $result )) 
+				while($row = mysqli_fetch_array( $result )) 
 				{
 					// Print out the contents of each row into a table
 					echo '<tr><td bgcolor="#75D169">'; 

@@ -29,10 +29,10 @@ $sort = "";
         }
 // This block grabs the whole list for viewing
 $review_list = "";
-$sql = mysql_query("SELECT * FROM reviews". $sort);
-$reviewCount = mysql_num_rows($sql); // count the output amount
+$sql = mysqli_query($link,"SELECT * FROM reviews". $sort);
+$reviewCount = mysqli_num_rows($sql); // count the output amount
 if ($reviewCount > 0) {
-	while($row = mysql_fetch_array($sql)){ 
+	while($row = mysqli_fetch_array($sql)){ 
              $review_id = $row["review_id"];
 			 $artist = $row["artist"];
 			 $title = $row["title"];

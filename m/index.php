@@ -7,7 +7,7 @@ include "utils/connect_db.php";
 
 // This block grabs the whole list for viewing
 $sidebar_list = "";
-$sql = mysql_query("SELECT * FROM reviews ORDER BY review_id DESC LIMIT 5");
+$sql = mysqli_query($link,"SELECT * FROM reviews ORDER BY review_id DESC LIMIT 5");
 $reviewCount = mysql_num_rows($sql); // count the output amount
 if ($reviewCount > 0) {
 	while($row = mysql_fetch_array($sql)){ 
@@ -23,7 +23,7 @@ if ($reviewCount > 0) {
 
 // This block grabs Home Page Text
 $home_text = "";
-$sql_home = mysql_query("SELECT * FROM manage_style WHERE style_id='1'");
+$sql_home = mysqli_query($link,"SELECT * FROM manage_style WHERE style_id='1'");
 $count = mysql_num_rows($sql_home); // count the output amount
 if ($count > 0) {
 	while($row = mysql_fetch_array($sql_home)){ 

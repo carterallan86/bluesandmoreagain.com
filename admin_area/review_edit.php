@@ -14,9 +14,9 @@ $password = preg_replace('#[^A-Za-z0-9]#i', '', $_SESSION["password"]); // filte
 // Run mySQL query to be sure that this person is an admin and that their password session var equals the database information
 // Connect to the MySQL database  
 include "../utils/connect_db.php"; 
-$sql = mysql_query("SELECT * FROM admin WHERE id='$managerID' AND username='$manager' AND password='$password' LIMIT 1"); // query the person
+$sql = mysqli_query($link,"SELECT * FROM admin WHERE id='$managerID' AND username='$manager' AND password='$password' LIMIT 1"); // query the person
 // ------- MAKE SURE PERSON EXISTS IN DATABASE ---------
-$existCount = mysql_num_rows($sql); // count the row nums
+$existCount = mysqli_num_rows($sql); // count the row nums
 if ($existCount == 0) { // evaluate the count
 	 echo "Your login session data is not on record in the database.";
      exit();
@@ -31,19 +31,19 @@ ini_set('display_errors', '1');
 // Parse the form data and add review item to the system
 if (isset($_POST['button'])) {
 	
-	$rid = mysql_real_escape_string($_POST['thisID']);
-    $value1 = mysql_real_escape_string($_POST['artist']);
-	$value2 = mysql_real_escape_string($_POST['titlea']);
-	$value3 = mysql_real_escape_string($_POST['label']);
-	$value4 = mysql_real_escape_string($_POST['summary']);
-	$value5 = mysql_real_escape_string($_POST['web1']);
-	$value6 = mysql_real_escape_string($_POST['web2']);
-	$value7 = mysql_real_escape_string($_POST['web3']);
-	$value8 = mysql_real_escape_string($_POST['review']);
-	$value9 = mysql_real_escape_string($_POST['category']);
+	$rid = mysqli_real_escape_string($_POST['thisID']);
+    $value1 = mysqli_real_escape_string($_POST['artist']);
+	$value2 = mysqli_real_escape_string($_POST['titlea']);
+	$value3 = mysqli_real_escape_string($_POST['label']);
+	$value4 = mysqli_real_escape_string($_POST['summary']);
+	$value5 = mysqli_real_escape_string($_POST['web1']);
+	$value6 = mysqli_real_escape_string($_POST['web2']);
+	$value7 = mysqli_real_escape_string($_POST['web3']);
+	$value8 = mysqli_real_escape_string($_POST['review']);
+	$value9 = mysqli_real_escape_string($_POST['category']);
 	
 	// See if that product name is an identical match to another product in the system
-								$sql = mysql_query("UPDATE reviews SET artist='$value1', title='$value2', label='$value3', summary='$value4', web1='$value5', web2='$value6', web3='$value7', review='$value8', category='$value9' WHERE review_id='$rid'") or die (mysql_error());
+								$sql = mysqli_query($link,"UPDATE reviews SET artist='$value1', title='$value2', label='$value3', summary='$value4', web1='$value5', web2='$value6', web3='$value7', review='$value8', category='$value9' WHERE review_id='$rid'") or die (mysqli_error());
 			
 	if ($_FILES['fileField']['tmp_name'] != "") {
 	    // Place image in the folder 
@@ -58,10 +58,10 @@ if (isset($_POST['button'])) {
 <?php 
 // This block grabs the whole list for viewing
 $review_list = "";
-$sql = mysql_query("SELECT * FROM reviews ORDER BY review_id DESC");
-$productCount = mysql_num_rows($sql); // count the output amount
+$sql = mysqli_query($link,"SELECT * FROM reviews ORDER BY review_id DESC");
+$productCount = mysqli_num_rows($sql); // count the output amount
 if ($productCount > 0) {
-	while($row = mysql_fetch_array($sql)){ 
+	while($row = mysqli_fetch_array($sql)){ 
              $id = $row["review_id"];
 			 $artist = $row["artist"];
 			 $title = $row["title"];
@@ -77,10 +77,10 @@ if ($productCount > 0) {
 // Gather this product's full information for inserting automatically into the edit form below on page
 if (isset($_GET['rid'])) {
 	$targetID = $_GET['rid'];
-    $sql = mysql_query("SELECT * FROM reviews WHERE review_id='$targetID' LIMIT 1");
-    $productCount = mysql_num_rows($sql); // count the output amount
+    $sql = mysqli_query($link,"SELECT * FROM reviews WHERE review_id='$targetID' LIMIT 1");
+    $productCount = mysqli_num_rows($sql); // count the output amount
     if ($productCount > 0) {
-	    while($row = mysql_fetch_array($sql)){ 
+	    while($row = mysqli_fetch_array($sql)){ 
              $id = $row["review_id"];
 			 $artist = $row["artist"];
 			 $title = $row["title"];

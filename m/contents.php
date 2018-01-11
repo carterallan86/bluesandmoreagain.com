@@ -25,7 +25,7 @@ $sort = "";
         }
 // This block grabs the whole list for viewing
 $review_list = "";
-$sql = mysql_query("SELECT * FROM reviews". $sort);
+$sql = mysqli_query($link,"SELECT * FROM reviews". $sort);
 $reviewCount = mysql_num_rows($sql); // count the output amount
 if ($reviewCount > 0) {
 	while($row = mysql_fetch_array($sql)){ 

@@ -14,9 +14,9 @@ $password = preg_replace('#[^A-Za-z0-9]#i', '', $_SESSION["password"]); // filte
 // Run mySQL query to be sure that this person is an admin and that their password session var equals the database information
 // Connect to the MySQL database  
 include "../utils/connect_db.php"; 
-$sql = mysql_query("SELECT * FROM admin WHERE id='$managerID' AND username='$manager' AND password='$password' LIMIT 1"); // query the person
+$sql = mysqli_query($link,"SELECT * FROM admin WHERE id='$managerID' AND username='$manager' AND password='$password' LIMIT 1"); // query the person
 // ------- MAKE SURE PERSON EXISTS IN DATABASE ---------
-$existCount = mysql_num_rows($sql); // count the row nums
+$existCount = mysqli_num_rows($sql); // count the row nums
 if ($existCount == 0) { // evaluate the count
 	 echo "Your login session data is not on record in the database.";
      exit();
@@ -39,7 +39,7 @@ if (isset($_GET['yesdelete'])) {
 	// remove item from system and delete its picture
 	// delete from database
 	$id_to_delete = $_GET['yesdelete'];
-	$sql = mysql_query("DELETE FROM reviews WHERE review_id='$id_to_delete' LIMIT 1") or die (mysql_error());
+	$sql = mysqli_query($link,"DELETE FROM reviews WHERE review_id='$id_to_delete' LIMIT 1") or die (mysqli_error());
 	// unlink the image from server
 	// Remove The Pic -------------------------------------------
     $pictodelete = ("../artwork_images/$id_to_delete.jpg");
@@ -57,21 +57,21 @@ if (isset($_GET['yesdelete'])) {
 if (isset($_POST['artist'])) {
 	
     
-    $value1 = mysql_real_escape_string($_POST['artist']);
-	$value2 = mysql_real_escape_string($_POST['titlea']);
-	$value3 = mysql_real_escape_string($_POST['label']);
-	$value4 = mysql_real_escape_string($_POST['summary']);
-	$value5 = mysql_real_escape_string($_POST['web1']);
-	$value6 = mysql_real_escape_string($_POST['web2']);
-	$value7 = mysql_real_escape_string($_POST['web3']);
-	$value8 = mysql_real_escape_string($_POST['review']);
-	$value9 = mysql_real_escape_string($_POST['category']);
+    $value1 = mysqli_real_escape_string($_POST['artist']);
+	$value2 = mysqli_real_escape_string($_POST['titlea']);
+	$value3 = mysqli_real_escape_string($_POST['label']);
+	$value4 = mysqli_real_escape_string($_POST['summary']);
+	$value5 = mysqli_real_escape_string($_POST['web1']);
+	$value6 = mysqli_real_escape_string($_POST['web2']);
+	$value7 = mysqli_real_escape_string($_POST['web3']);
+	$value8 = mysqli_real_escape_string($_POST['review']);
+	$value9 = mysqli_real_escape_string($_POST['category']);
     
 
 	// Add this product into the database now
-	$sql = mysql_query("INSERT INTO reviews (artist, title, label, summary, web1, web2, web3, review, category, date_added) 
-			VALUES ('$value1', '$value2', '$value3', '$value4', '$value5', '$value6', '$value7', '$value8', '$value9',now())") or die (mysql_error());
-     $rid = mysql_insert_id();
+	$sql = mysqli_query($link,"INSERT INTO reviews (artist, title, label, summary, web1, web2, web3, review, category, date_added) 
+			VALUES ('$value1', '$value2', '$value3', '$value4', '$value5', '$value6', '$value7', '$value8', '$value9',now())") or die (mysqli_error());
+     $rid = mysqli_insert_id();
      
 	// Place image in the folder 
 	$newname = "$rid.jpg";
@@ -86,10 +86,10 @@ if (isset($_POST['artist'])) {
 <?php 
 // This block grabs the whole list for viewing
 $review_list = "";
-$sql = mysql_query("SELECT * FROM reviews ORDER BY review_id DESC");
-$productCount = mysql_num_rows($sql); // count the output amount
+$sql = mysqli_query($link,"SELECT * FROM reviews ORDER BY review_id DESC");
+$productCount = mysqli_num_rows($sql); // count the output amount
 if ($productCount > 0) {
-	while($row = mysql_fetch_array($sql)){ 
+	while($row = mysqli_fetch_array($sql)){ 
              $id = $row["review_id"];
 			 $artist = $row["artist"];
 			 $title = $row["title"];

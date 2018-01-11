@@ -33,7 +33,7 @@ if (isset($_POST['button'])) {
 	
     $value1 = mysqli_real_escape_string($_POST['home_text']);
 	// See if that product name is an identical match to another product in the system
-								$sql = mysqli_query($link,"UPDATE manage_style SET home_text='$value1' WHERE style_id='1'") or die (mysql_error());
+								$sql = mysqli_query($link,"UPDATE manage_style SET home_text='$value1' WHERE style_id='1'") or die (mysqli_error());
 			
 	if ($_FILES['fileField1']['tmp_name'] != "") {
 	    // Place image in the folder 

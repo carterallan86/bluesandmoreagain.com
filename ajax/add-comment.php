@@ -15,8 +15,8 @@ if($_POST['act'] == 'add-com'):
 
 	if(strlen($name) <= '1'){ $name = 'Guest';}
     //insert the comment in the database
-    mysql_query("INSERT INTO comments (name, comment, id_post)VALUES( '$name', '$comment', '$id_post')");
-    if(!mysql_errno()){
+    mysqli_query($link,"INSERT INTO comments (name, comment, id_post)VALUES( '$name', '$comment', '$id_post')");
+    if(!mysqli_errno()){
 ?>
 
     <div class="cmt-cnt">
