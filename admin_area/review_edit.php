@@ -31,20 +31,26 @@ ini_set('display_errors', '1');
 // Parse the form data and add review item to the system
 if (isset($_POST['button'])) {
 	
-	$rid = mysqli_real_escape_string($_POST['thisID']);
-    $value1 = mysqli_real_escape_string($_POST['artist']);
-	$value2 = mysqli_real_escape_string($_POST['titlea']);
-	$value3 = mysqli_real_escape_string($_POST['label']);
-	$value4 = mysqli_real_escape_string($_POST['summary']);
-	$value5 = mysqli_real_escape_string($_POST['web1']);
-	$value6 = mysqli_real_escape_string($_POST['web2']);
-	$value7 = mysqli_real_escape_string($_POST['web3']);
-	$value8 = mysqli_real_escape_string($_POST['review']);
-	$value9 = mysqli_real_escape_string($_POST['category']);
+	$rid = mysqli_real_escape_string($link,$_POST['thisID']);
+  $value1 = mysqli_real_escape_string($link,$_POST['artist']);
+	$value2 = mysqli_real_escape_string($link,$_POST['titlea']);
+	$value3 = mysqli_real_escape_string($link,$_POST['label']);
+	$value4 = mysqli_real_escape_string($link,$_POST['summary']);
+	$value5 = mysqli_real_escape_string($link,$_POST['web1']);
+	$value6 = mysqli_real_escape_string($link,$_POST['web2']);
+	$value7 = mysqli_real_escape_string($link,$_POST['web3']);
+	$value8 = mysqli_real_escape_string($link,$_POST['review']);
+	$value9 = mysqli_real_escape_string($link,$_POST['category']);
 	
 	// See if that product name is an identical match to another product in the system
-								$sql = mysqli_query($link,"UPDATE reviews SET artist='$value1', title='$value2', label='$value3', summary='$value4', web1='$value5', web2='$value6', web3='$value7', review='$value8', category='$value9' WHERE review_id='$rid'") or die (mysqli_error());
-			
+	$sql_post = mysqli_query($link,"UPDATE reviews SET artist='$value1', title='$value2', label='$value3', summary='$value4', web1='$value5', web2='$value6', web3='$value7', review='$value8', category='$value9' WHERE review_id='$rid'") or die (mysqli_error());
+  
+  if (mysqli_query($link,$sql_post)) {
+    echo "Record updated successfully";
+} else {
+    echo "Error updating record: " . mysqli_error($link); }  mysqli_close($link);
+
+
 	if ($_FILES['fileField']['tmp_name'] != "") {
 	    // Place image in the folder 
 	    $newname = "$rid.jpg";
@@ -58,10 +64,10 @@ if (isset($_POST['button'])) {
 <?php 
 // This block grabs the whole list for viewing
 $review_list = "";
-$sql = mysqli_query($link,"SELECT * FROM reviews ORDER BY review_id DESC");
-$productCount = mysqli_num_rows($sql); // count the output amount
+$sql_display = mysqli_query($link,"SELECT * FROM reviews ORDER BY review_id DESC");
+$productCount = mysqli_num_rows($sql_display); // count the output amount
 if ($productCount > 0) {
-	while($row = mysqli_fetch_array($sql)){ 
+	while($row = mysqli_fetch_array($sql_display)){ 
              $id = $row["review_id"];
 			 $artist = $row["artist"];
 			 $title = $row["title"];

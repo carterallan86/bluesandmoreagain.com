@@ -31,9 +31,14 @@ ini_set('display_errors', '1');
 // Parse the form data and add review item to the system
 if (isset($_POST['button'])) {
 	
-    $value1 = mysqli_real_escape_string($_POST['home_text']);
+    $value1 = mysqli_real_escape_string($link,$_POST['home_text']);
 	// See if that product name is an identical match to another product in the system
-								$sql = mysqli_query($link,"UPDATE manage_style SET home_text='$value1' WHERE style_id='1'") or die (mysqli_error());
+    $sql_post = "UPDATE manage_style SET home_text='$value1' WHERE style_id='1'";
+    
+    if (mysqli_query($link,$sql_post)) {
+      echo "Record updated successfully";
+  } else {
+      echo "Error updating record: " . mysqli_error($link); }  mysqli_close($link);
 			
 	if ($_FILES['fileField1']['tmp_name'] != "") {
 	    // Place image in the folder 
@@ -53,9 +58,9 @@ if (isset($_POST['button'])) {
 <?php 
 // Gather this product's full information for inserting automatically into the edit form below on page
 
-    $sql = mysqli_query($link,"SELECT * FROM manage_style WHERE style_id='1' LIMIT 1");
-    if ($sql > 0) {
-	    while($row = mysqli_fetch_array($sql)){ 
+    $sql_display = mysqli_query($link,"SELECT * FROM manage_style WHERE style_id='1' LIMIT 1");
+    if (!empty($sql_display)) {
+	    while($row = mysqli_fetch_array($sql_display)){ 
              $home_text = $row["home_text"];
 			 }
     } else {

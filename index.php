@@ -7,16 +7,17 @@ include "utils/connect_db.php";
 
 // This block grabs the whole list for viewing
 $sidebar_list = "";
+
 // $sql = mysqli_query("SELECT * FROM reviews ORDER BY review_id DESC LIMIT 5");
 $sql = mysqli_query( $link,"SELECT * FROM reviews ORDER BY review_id DESC LIMIT 5");
 $reviewCount = mysqli_num_rows($sql); // count the output amount
 if ($reviewCount > 0) {
 	while($row = mysqli_fetch_array($sql)){ 
-             $review_id = $row["review_id"];
-			 $artist = $row["artist"];
-			 $title = $row["title"];
-			 $date_added = strftime("%b %d, %Y", strtotime($row["date_added"]));
-			 $sidebar_list .= "$date_added - $title - $artist <br><a href='review.php?rid=$review_id' >View Full Review</a><br><br>";
+          $review_id = $row["review_id"];
+					$artist = $row["artist"];
+					$title = $row["title"];
+					$date_added = strftime("%b %d, %Y", strtotime($row["date_added"]));
+					$sidebar_list .= "$date_added - $title - $artist <br><a href='review.php?rid=$review_id' >View Full Review</a><br><br>";
     }
 } else {
 	$sidebar_list = "You have no recent reviews added";

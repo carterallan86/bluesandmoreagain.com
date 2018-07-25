@@ -57,15 +57,15 @@ if (isset($_GET['yesdelete'])) {
 if (isset($_POST['artist'])) {
 	
     
-    $value1 = mysqli_real_escape_string($_POST['artist']);
-	$value2 = mysqli_real_escape_string($_POST['titlea']);
-	$value3 = mysqli_real_escape_string($_POST['label']);
-	$value4 = mysqli_real_escape_string($_POST['summary']);
-	$value5 = mysqli_real_escape_string($_POST['web1']);
-	$value6 = mysqli_real_escape_string($_POST['web2']);
-	$value7 = mysqli_real_escape_string($_POST['web3']);
-	$value8 = mysqli_real_escape_string($_POST['review']);
-	$value9 = mysqli_real_escape_string($_POST['category']);
+    $value1 = mysqli_real_escape_string($link,$_POST['artist']);
+	$value2 = mysqli_real_escape_string($link,$_POST['titlea']);
+	$value3 = mysqli_real_escape_string($link,$_POST['label']);
+	$value4 = mysqli_real_escape_string($link,$_POST['summary']);
+	$value5 = mysqli_real_escape_string($link,$_POST['web1']);
+	$value6 = mysqli_real_escape_string($link,$_POST['web2']);
+	$value7 = mysqli_real_escape_string($link,$_POST['web3']);
+	$value8 = mysqli_real_escape_string($link,$_POST['review']);
+	$value9 = mysqli_real_escape_string($link,$_POST['category']);
     
 
 	// Add this product into the database now
