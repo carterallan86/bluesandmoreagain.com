@@ -61,7 +61,7 @@ addinfo($page);
 		
 		<div class="sidebar">
           <div class="sidebar_item">
-            <h2>Website updates</h2>
+            <h2>Website updates test push</h2>
             <p>Please find below my most recently added reviews.</p>
           </div><!--close sidebar_item--> 
         </div><!--close sidebar-->     		
