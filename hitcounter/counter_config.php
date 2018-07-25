@@ -1,11 +1,19 @@
 <?php
 $db_host = "localhost"; 
 // Place the username for the MySQL database here 
+<<<<<<< HEAD
 $db_username = "root";  
 // Place the password for the MySQL database here 
 $db_pass = "secret";  
 // Place the name for the MySQL database here 
 $db_name = "bluesandmoreagain"; 
+=======
+$db_username = "blueenzd_admin";  
+// Place the password for the MySQL database here 
+$db_pass = "[bf*WUk+kFHf";  
+// Place the name for the MySQL database here 
+$db_name = "blueenzd_bama"; 
+>>>>>>> fd87d5100872f76c365bd0c41181de5be0738659
 
 $dbtablehits= 'hits';
 $dbtableinfo= 'info';

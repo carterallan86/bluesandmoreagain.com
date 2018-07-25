@@ -1,9 +1,4 @@
 <?php  
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);  
-
-
 // This file is www.developphp.com curriculum material
 // Written by Adam Khoury January 01, 2011
 // http://www.youtube.com/view_play_list?p=442E340A42191003
@@ -16,19 +11,11 @@ ini_set('display_errors', 1);
 // sometimes looks like this: >>      ???mysql??.someserver.net 
 $db_host = "localhost"; 
 // Place the username for the MySQL database here 
-<<<<<<< HEAD
-$db_username = "root";  
-// Place the password for the MySQL database here 
-$db_pass = "secret";  
-// Place the name for the MySQL database here 
-$db_name = "bluesandmoreagain.com"; 
-=======
 $db_username = "blueenzd_admin";  
 // Place the password for the MySQL database here 
 $db_pass = "[bf*WUk+kFHf";  
 // Place the name for the MySQL database here 
 $db_name = "blueenzd_bama"; 
->>>>>>> fd87d5100872f76c365bd0c41181de5be0738659
 
 $dbtablehits= 'hits';
 $dbtableinfo= 'info';
@@ -36,16 +23,6 @@ $dbtableinfo= 'info';
 // Run the actual connection here  
 $link = mysqli_connect($db_host, $db_username, $db_pass, $db_name);
 
-   
-
-/* Mobile Re-Direct 
-require_once 'Mobile_Detect/Mobile_Detect.php';
-$detect = new Mobile_Detect;
- 
-if($detect->isMobile()) {
-    header('Location: http://m.bluesandmoreagain.com/index.php');
-    exit;
-}
-*/
+     
 
 ?>

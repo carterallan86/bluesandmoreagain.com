@@ -39,4 +39,4 @@ Thumbs.db
 utils/connect_db
 utils/connect_db_live
 hitcounter/counter_config
-\m\utils\connect_db
+m/utils/connect_db
